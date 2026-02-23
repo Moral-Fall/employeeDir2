@@ -3,32 +3,37 @@ const app = express();
 export default app;
 
 import employees from "#db/employees";
+import router from "#db/routes"
 
-app.get("/", (req, res) => {
-  res.send("Hello employees!");
-});
+const router = express.Router
 
-app.get("/employees", (req, res) => {
-  res.send(employees);
-});
+app.use(/routes)
 
-// Note: this middleware has to come first! Otherwise, Express will treat
-// "random" as the argument to the `id` parameter of /employees/:id.
-app.get("/employees/random", (req, res) => {
-  const randomIndex = Math.floor(Math.random() * employees.length);
-  res.send(employees[randomIndex]);
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello employees!");
+// });
 
-app.get("/employees/:id", (req, res) => {
-  const { id } = req.params;
+// app.get("/routes", (req, res) => {
+//   res.send(employees);
+// });
 
-  // req.params are always strings, so we need to convert `id` into a number
-  // before we can use it to find the employee
-  const employee = employees.find((e) => e.id === +id);
+// // Note: this middleware has to come first! Otherwise, Express will treat
+// // "random" as the argument to the `id` parameter of /employees/:id.
+// app.get("/routes/random", (req, res) => {
+//   const randomIndex = Math.floor(Math.random() * employees.length);
+//   res.send(employees[randomIndex]);
+// });
 
-  if (!employee) {
-    return res.status(404).send("Employee not found");
-  }
+// app.get("/routes/:id", (req, res) => {
+//   const { id } = req.params;
 
-  res.send(employee);
-});
+//   // req.params are always strings, so we need to convert `id` into a number
+//   // before we can use it to find the employee
+//   const employee = employees.find((e) => e.id === +id);
+
+//   if (!employee) {
+//     return res.status(404).send("Employee not found");
+//   }
+
+//   res.send(employee);
+// });
